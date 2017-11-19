@@ -343,10 +343,6 @@ function announce_step {
 # Call maven deploy.
 # upload zip to s3.
 
-function publish_ie {
-    local cmd="mvn -B package -pl insightedge-packager -P publish-artifacts  -DskipTests=true -Dinsightedge.version=${IE_VERSION} -Dinsightedge.branch=$BRANCH -Dinsightedge.build.number=${FINAL_BUILD_NUMBER} -Dinsightedge.milestone=${MILESTONE} -Dnewman.tags=$NEWMAN_TAGS -Dmaven.repo.local=$M2/repository"
-    execute_command "Publish IE to Newman" "$1" "$cmd"
-}
 
 
 function getSHA {
@@ -452,8 +448,6 @@ function release_ie {
     announce_step "delete temp branch $temp_branch_name in ie zeppelin"
     delete_temp_branch "$ie_zeppelin_folder" "$temp_branch_name"
 
-#    announce_step "publish ie to hercules and newman"
-#    publish_ie "$ie_folder"
 
     announce_step "DONE !"
 
